@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            background: linear-gradient(to right, #ff4e50, #fc913a);
+            color: white;
+            overflow: hidden;
+        }
+        .container {
+            margin-top: 100px;
+            position: relative;
+        }
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+        }
+        button {
+            font-size: 24px;
+            padding: 15px 30px;
+            margin: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        #yes {
+            background-color: #ff165d;
+            color: white;
+        }
+        #yes:hover {
+            transform: scale(1.2);
+            background-color: #ff477e;
+        }
+        #no {
+            background-color: white;
+            color: black;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: red;
+            animation: float 4s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+        .dancing-dog {
+            display: none;
+            width: 200px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function moveButton() {
+            let button = document.getElementById("no");
+            let x = Math.random() * (window.innerWidth - 150);
+            let y = Math.random() * (window.innerHeight - 50);
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+        function showMessage() {
+            document.getElementById("container").innerHTML = `
+                <h1>Yay! Can't wait for Valentine's Day with you! ❤️</h1>
+                <img src="https://media.giphy.com/media/3o7527pa7qs9kCG78A/giphy.gif" class="dancing-dog" style="display:block;">
+            `;
+        }
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            heart.innerHTML = "❤️";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</head>
+<body>
+    <div class="hearts"></div>
+    <div class="container" id="container">
+        <h1>Kwanele Mathenjwa, will you be my Valentine? ❤️</h1>
+        <div class="buttons">
+            <button id="yes" onclick="showMessage()">Yes</button>
+            <button id="no" onmouseover="moveButton()">No</button>
+        </div>
+    </div>
+</body>
+</html>
